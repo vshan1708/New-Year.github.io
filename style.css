@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --gold: #ffd700;
+    --white: #ffffff;
+    --deep-blue: #050a18;
+    --night-sky: radial-gradient(ellipse at bottom, #1B2735 0%, #050a18 100%);
+    --glow: rgba(255, 215, 0, 0.4);
+}
+
+body {
+    margin: 0;
+    background: var(--night-sky);
+    background-attachment: fixed;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Blinking Stars Effect */
+body::before, body::after {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 2px; height: 2px;
+    background: transparent;
+    z-index: -1;
+}
+body::before {
+    box-shadow: 10vw 20vh #FFF, 25vw 40vh #FFF, 35vw 10vh #FFF, 45vw 80vh #FFF, 55vw 30vh #FFF, 70vw 60vh #FFF, 85vw 15vh #FFF, 90vw 90vh #FFF, 20vw 10vh #FFF, 60vw 10vh #FFF;
+    animation: twinkle 4s infinite ease-in-out;
+}
+body::after {
+    width: 3px; height: 3px;
+    box-shadow: 15vw 15vh var(--gold), 30vw 60vh var(--gold), 50vw 40vh var(--gold), 65vw 20vh var(--gold), 80vw 80vh var(--gold), 10vw 90vh var(--gold);
+    animation: twinkle 6s infinite ease-in-out;
+    animation-delay: 2s;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Containers & Layout */
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 500px;
+    width: 90%;
+}
+
+/* Typography */
+h1, h2 {
+    font-family: 'Dancing Script', cursive;
+    color: var(--gold);
+    text-shadow: 0 0 15px var(--glow);
+    margin-bottom: 20px;
+}
+
+/* Buttons (No blue links) */
+.btn {
+    background: var(--gold);
+    color: var(--deep-blue) !important;
+    padding: 12px 35px;
+    border-radius: 50px;
+    text-decoration: none !important;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 20px;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--glow);
+}
+.btn:hover { transform: scale(1.1); box-shadow: 0 0 25px var(--gold); }
+
+/* Gallery Logic */
+.gallery-page { display: block !important; overflow-y: auto !important; height: auto !important; }
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+}
+.memory-item {
+    background: white;
+    padding: 12px 12px 40px 12px;
+    border-radius: 3px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    transition: 0.4s;
+    transform: rotate(calc(var(--r, 0deg)));
+}
+.memory-item:nth-child(odd) { --r: -2deg; }
+.memory-item:nth-child(even) { --r: 2deg; }
+.memory-item:hover { transform: scale(1.05) rotate(0deg); z-index: 5; }
+
+.memory-item img, .memory-item video {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+.caption { color: #333; font-family: 'Dancing Script', cursive; font-size: 1.3rem; margin-top: 15px; display: block; }
+
+/* Inputs */
+input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--gold);
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+/* Fireworks background */
+#fireworks { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 10; }
+
+.memory-grid {
+    display: grid;
+    /* This automatically switches from 1 column on small phones to more on tablets */
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); 
+    gap: 15px;
+    padding: 15px;
+}
+
+/* Adjust font sizes for smaller screens */
+@media (max-width: 600px) {
+    h1, h2 { font-size: 2.2rem !important; }
+    .card { width: 85%; padding: 20px; }
+    .memory-item img, .memory-item video { height: 200px; } /* Slightly shorter for mobile */
+}

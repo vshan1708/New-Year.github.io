@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>The "Us" Quiz 🎮</h2>
+        
+        <div class="card" id="quiz-card">
+            <!-- Progress Tracker -->
+            <p id="progress" style="font-size: 0.8rem; color: var(--gold);">Question 1 of 5</p>
+            
+            <!-- Question Text -->
+            <p id="quiz-question" style="font-weight: 600; font-size: 1.3rem;">Loading...</p>
+            
+            <!-- Answer Buttons -->
+            <div id="answer-buttons">
+                <button class="btn" onclick="handleAnswer('Me')">Me</button>
+                <button class="btn" onclick="handleAnswer('You')">You</button>
+            </div>
+
+            <!-- Feedback Area -->
+            <div id="feedback-area" style="display:none; margin-top:20px;">
+                <p id="feedback-text"></p>
+                <button class="btn" id="next-button" onclick="loadNextQuestion()">Next Question ➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to the separate JS file -->
+    <script src="script.js"></script>
+    <script>
+        function nextQ() { document.getElementById('feedback').style.display = 'block'; }
+    </script>
+</body>
+</html>
